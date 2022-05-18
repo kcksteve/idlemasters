@@ -1,5 +1,6 @@
-//Manages the player stats. Saving, Loading, Clearing and accessing. Singleton class.
+//Stat Manager - Manages the player stats. Saving, Loading, Clearing and accessing. Singleton class.
 class StatManager {
+    //public stat objects
     foraging = {level:0, xp:0, resource:0};
     logging = {level:0, xp:0, resource:0};
     fishing = {level:0, xp:0, resource:0};
@@ -8,7 +9,6 @@ class StatManager {
     armor = {level:0, xp:0};
     weapon = {level:0, xp:0};
     combat = {level:0, xp:0};
-    #allStats = [];
 
     constructor() {
         //Instance check to ensure to stop creation of a second instance
@@ -19,7 +19,7 @@ class StatManager {
         this.loadAll();
     }
 
-    //Save all stats to web storage
+    //Save all stats to web storage - yucky should be programatic
     saveAll() {
         localStorage.setItem("foragingLevel", this.foraging.level);
         localStorage.setItem("foragingXP", this.foraging.xp);
