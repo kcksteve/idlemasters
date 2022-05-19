@@ -9,6 +9,7 @@ class StatManager {
     armor = {level:0, xp:0};
     weapon = {level:0, xp:0};
     combat = {level:0, xp:0};
+    player = {hp:100, ap:100};
 
     constructor() {
         //Instance check to ensure to stop creation of a second instance
@@ -49,41 +50,44 @@ class StatManager {
 
         localStorage.setItem("combatLevel", this.combat.level);
         localStorage.setItem("combatXP", this.combat.xp);
+
+        localStorage.setItem("playerHP", this.player.hp);
+        localStorage.setItem("playerAP", this.player.ap);
     }
 
     //Load all stats from webstorage
     loadAll() {
-        this.foraging.Level = parseInt(localStorage.getItem("foragingLevel"));
-        this.foraging.Level = parseInt(localStorage.getItem("foragingXP"));
-        this.foraging.Level = parseInt(localStorage.getItem("foragingResource"));
+        this.foraging.level = parseInt(localStorage.getItem("foragingLevel"));
+        this.foraging.xp = parseInt(localStorage.getItem("foragingXP"));
+        this.foraging.resource = parseInt(localStorage.getItem("foragingResource"));
 
-        this.logging.Level = parseInt(localStorage.getItem("loggingLevel"));
-        this.logging.Level = parseInt(localStorage.getItem("loggingXP"));
-        this.logging.Level = parseInt(localStorage.getItem("loggingResource"));
+        this.logging.level = parseInt(localStorage.getItem("loggingLevel"));
+        this.logging.xp = parseInt(localStorage.getItem("loggingXP"));
+        this.logging.resource = parseInt(localStorage.getItem("loggingResource"));
 
-        this.fishing.Level = parseInt(localStorage.getItem("fishingLevel"));
-        this.fishing.Level = parseInt(localStorage.getItem("fishingXP"));
-        this.fishing.Level = parseInt(localStorage.getItem("fishingResource"));
+        this.fishing.level = parseInt(localStorage.getItem("fishingLevel"));
+        this.fishing.xp = parseInt(localStorage.getItem("fishingXP"));
+        this.fishing.resource = parseInt(localStorage.getItem("fishingResource"));
 
-        this.mining.Level = parseInt(localStorage.getItem("miningLevel"));
-        this.mining.Level = parseInt(localStorage.getItem("miningXP"));
-        this.mining.Level = parseInt(localStorage.getItem("miningResource"));
+        this.mining.level = parseInt(localStorage.getItem("miningLevel"));
+        this.mining.xp = parseInt(localStorage.getItem("miningXP"));
+        this.mining.resource = parseInt(localStorage.getItem("miningResource"));
 
-        this.alchemy.Level = parseInt(localStorage.getItem("alchemyLevel"));
-        this.alchemy.Level = parseInt(localStorage.getItem("alchemyXP"));
-        this.alchemy.Level = parseInt(localStorage.getItem("alchemyResource"));
+        this.alchemy.level = parseInt(localStorage.getItem("alchemyLevel"));
+        this.alchemy.xp = parseInt(localStorage.getItem("alchemyXP"));
+        this.alchemy.resource = parseInt(localStorage.getItem("alchemyResource"));
 
-        this.armor.Level = parseInt(localStorage.getItem("armorLevel"));
-        this.armor.Level = parseInt(localStorage.getItem("armorXP"));
-        this.armor.Level = parseInt(localStorage.getItem("armorResource"));
+        this.armor.level = parseInt(localStorage.getItem("armorLevel"));
+        this.armor.xp = parseInt(localStorage.getItem("armorXP"));
 
-        this.weapon.Level = parseInt(localStorage.getItem("weaponLevel"));
-        this.weapon.Level = parseInt(localStorage.getItem("weaponXP"));
-        this.weapon.Level = parseInt(localStorage.getItem("weaponResource"));
+        this.weapon.level = parseInt(localStorage.getItem("weaponLevel"));
+        this.weapon.xp = parseInt(localStorage.getItem("weaponXP"));
 
-        this.combat.Level = parseInt(localStorage.getItem("combatLevel"));
-        this.combat.Level = parseInt(localStorage.getItem("combatXP"));
-        this.combat.Level = parseInt(localStorage.getItem("combatResource"));
+        this.combat.level = parseInt(localStorage.getItem("combatLevel"));
+        this.combat.xp = parseInt(localStorage.getItem("combatXP"));
+
+        this.player.hp = parseInt(localStorage.getItem("playerHp"));
+        this.player.ap = parseInt(localStorage.getItem("playerAp"));
     }
 
     //Clear all session and saved stats
