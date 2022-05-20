@@ -2,12 +2,14 @@
 class ActivityManager {
     currentActivity = null;
     #statManager = null;
+    #uiManager = null;
     #timeout = null;
-    #activityLength = 3000;
+    #activityMulti = 0.1;
     #xpIncrement = 1;
     #apDecrement = 1;
+    #resourceMulti = 0.1;
 
-    constructor(statManager) {
+    constructor(statManager, uiManager) {
         //Instance check to ensure to stop creation of a second instance
         if (ActivityManager.instance) {
             throw new Error("Singleton classes can only be instantiated once.")
@@ -15,7 +17,11 @@ class ActivityManager {
         ActivityManager.instance = this;
 
         //Ref to stat manager class
-        this.statManager = statManager;
+        this.#statManager = statManager;
+
+        //Ref to ui manager class
+        this.#uiManager = uiManager;
+        uiManager.setup(this);
     }
 
     canStartActivity(activity) {
@@ -49,8 +55,9 @@ class ActivityManager {
         if (this.#timeout === null) {
             switch (activity) {
                 case "foraging":
-                    this.#timeout = setTimeout(this.#completeActivity, this.#activityLength);
-                    //start activity bar
+                    let activityTime = 12 - (0.1 * this.#activityMulti);
+                    this.#timeout = setTimeout(this.#completeActivity, activityTime);
+                    this.#uiManager.activityBarStart(activityTime);
                     break;
                 case "logging":
                     break;
@@ -82,7 +89,7 @@ class ActivityManager {
                     else if (this.statManager.foraging.xp + this.#xpIncrement < 100 && this.statManager.foraging.level < 100) {
                         this.statManager.foraging.xp = this.#xpIncrement;
                     }
-                    this.statManager.foraging.resource += this.statManager.foraging.level;
+                    this.statManager.foraging.resource += Math.floor(this.#resourceMulti * this.statManager.foraging.level) + 1;
                     this.statManager.player.ap -= this.#apDecrement;
                     break;
                 case "logging":
@@ -100,7 +107,7 @@ class ActivityManager {
                 case "combat":
                     break;
             }
-            //update ui
+            this.#uiManager.uiUpdate();
             this.#timeout = null;
             this.startActivity(this.currentActivity);
         }
@@ -111,7 +118,7 @@ class ActivityManager {
             this.currentActivity = null;
             clearTimeout(this.#timeout);
             this.#timeout = null;
-            //reset activity bar
+            this.#uiManager.activityBarReset();
         }
     }
 }
