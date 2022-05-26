@@ -1,5 +1,15 @@
 {
   "dependencies": {
     "bootstrap": "^5.1.3"
+  },
+  "scripts": {
+    "lite": "lite-server",
+    "copyfonts": "copyfiles -f node_modules/font-awesome/fonts/* dist/fonts",
+    "imagemin": "imagemin img/* -o dist/img",
+    "usemin": "usemin contactus.html -d dist --htmlmin -o dist/contactus.html && usemin aboutus.html -d dist --htmlmin -o dist/aboutus.html && usemin index.html -d dist --htmlmin -o dist/index.html",
+    "clean": "rimraf dist",
+    "build": "npm run clean && npm run imagemin && npm run copyfonts && npm run usemin",
+    "start": "npm run",
+    "scss": "node-sass -o css/ css/"
   }
 }

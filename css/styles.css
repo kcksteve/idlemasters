@@ -1,0 +1,42 @@
+#game {
+    background-image: url("/images/bg-image.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+.nav-button {
+    font-size: 28px;
+}
+
+.nav-icon {
+    height: 30px;
+    padding-right: 10px;
+}
+
+.inventory-icon {
+    height: 50px;
+}
+
+.inventory-text {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    padding-top: 6px;
+}
+
+.card-icon {
+    height: 40px;
+    padding-top: 10px;
+}
+
+.card-title {
+    color: white;
+    font-size: 40px;
+}
+
+.stat-text {
+    text-align: right;
+    font-weight: 500;
+    color: white;
+}

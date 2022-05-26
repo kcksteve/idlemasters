@@ -55,7 +55,7 @@ class ActivityManager {
         if (this.#timeout === null) {
             switch (activity) {
                 case "foraging":
-                    let activityTime = 12 - (0.1 * this.#activityMulti);
+                    const activityTime = 12 - (0.1 * this.#activityMulti);
                     this.#timeout = setTimeout(this.#completeActivity, activityTime);
                     this.#uiManager.activityBarStart(activityTime);
                     break;

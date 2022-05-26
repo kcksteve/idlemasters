@@ -6,9 +6,125 @@
         <meta name="keywords" content="idle game, game, Idle Masters">
         <meta name="author" content="Stephen Krawczyk">
         <title>Idle Masters</title>
-        <script src="scripts/StatManager.js"></script>
-        <script src="scripts/StartUp.js"></script>
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/styles.css" />
     </head>
     <body>
+        <div class="container-fluid" id="game">
+            <div class= "row">
+                <div class="col col-12 col-md-3 bg-primary p-0 ">
+                    <img class="col col-3 col-md-12 p-2 p-md-4 img-fluid" src="images/logo.png">
+                    <button class="btn col col-1 offset-7 d-md-none p-0" id="navHamburger"><img class="img-fluid" src="images/menu-icon.svg"></button>
+                    <div class="d-none d-md-block collapse" id="navButtons">
+                        <button class="col col-12 btn btn-primary btn-lg py-4 nav-button"><img class="nav-icon" src="images/btn-fish.svg">Fishing</button>
+                        <button class="col col-12 btn btn-primary btn-lg py-4 nav-button"><img class="nav-icon" src="images/btn-flower.svg">Foraging</button>
+                        <button class="col col-12 btn btn-primary btn-lg py-4 nav-button"><img class="nav-icon" src="images/btn-wood.svg">Logging</button>
+                        <button class="col col-12 btn btn-primary btn-lg py-4 nav-button"><img class="nav-icon" src="images/btn-pickaxe.svg">Mining</button>
+                        <button class="col col-12 btn btn-primary btn-lg py-4 nav-button"><img class="nav-icon" src="images/btn-potion.svg">Alchemy</button>
+                        <button class="col col-12 btn btn-primary btn-lg py-4 nav-button"><img class="nav-icon" src="images/btn-shield.svg">Armor</button>
+                        <button class="col col-12 btn btn-primary btn-lg py-4 nav-button"><img class="nav-icon" src="images/btn-sword.svg">Weapon</button>
+                        <button class="col col-12 btn btn-primary btn-lg py-4 nav-button"><img class="nav-icon" src="images/btn-skull.svg">Combat</button>
+                    </div>
+                </div>
+                <div class="col col-12 col-md-9 min-vh-100">
+                    <div class="row mx-1 my-4 py-4 bg-primary">
+                        <div class="col col-1 p-0">
+                            <img class="d-block mx-auto card-icon" id="activity-icon" src="images/btn-fish.svg">
+                        </div>
+                        <div class="col col-3 p-0">
+                            <h1 class="card-title" id="activity-title">Fishing</h1>
+                        </div>
+                        <div class="col col-6 col-md-3 offset-2 offset-md-5 my-auto">
+                            <div class="col col-12">
+                                <p class="m-0 stat-text" id="activity-level">LVL 0/100</p>
+                            </div>
+                            <div class="col col-12">
+                                <p class="m-0 stat-text" id="activity-xp">XP 0/100</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mx-1 my-4 py-4 bg-primary">
+                        <div class="row pb-4">
+                            <div class="col col-1 p-0">
+                                <img class="d-block mx-auto card-icon" src="images/btn-chest.svg">
+                            </div>
+                            <div class="col col-11 p-0">
+                                <h2 class="card-title">Inventory</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-4 col-md-2 offset-md-1">
+                                <img class="inventory-icon d-block mx-auto" id="inventory-icon-fishing" src="images/btn-fish.svg">
+                                <p class="inventory-text" id="inventory-text-fishing">0</p>
+                            </div>
+                            <div class="col col-4 col-md-2">
+                                <img class="inventory-icon d-block mx-auto" id="inventory-icon-alchemy" src="images/btn-potion.svg">
+                                <p class="inventory-text" id="inventory-text-alchemy">0</p>
+                            </div>
+                            <div class="col col-4 col-md-2">
+                                <img class="inventory-icon d-block mx-auto" id="inventory-icon-foraging" src="images/btn-flower.svg">
+                                <p class="inventory-text" id="inventory-text-foraging">0</p>
+                            </div>
+                            <div class="col col-4 col-md-2">
+                                <img class="inventory-icon d-block mx-auto" id="inventory-icon-logging" src="images/btn-wood.svg">
+                                <p class="inventory-text" id="inventory-text-logging">0</p>
+                            </div>
+                            <div class="col col-4 col-md-2">
+                                <img class="inventory-icon d-block mx-auto" id="inventory-icon-mining" src="images/btn-pickaxe.svg">
+                                <p class="inventory-text" id="inventory-text-mining">0</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mx-1 my-4 py-4 bg-primary">
+                        <div class="col col-1 p-0">
+                            <img class="d-block mx-auto card-icon" id="activity-icon" src="images/btn-heart.svg">
+                        </div>
+                        <div class="col col-3 p-0">
+                            <h2 class="card-title" id="activity-title">Stats</h2>
+                        </div>
+                        <div class="col col-6 col-md-3 offset-2 offset-md-5 my-auto">
+                            <div class="col col-12">
+                                <p class="m-0 stat-text" id="stats-text-hp">Health 0/100</p>
+                            </div>
+                            <div class="col col-12">
+                                <p class="m-0 stat-text" id="stats-text-ap">Stamina 0/100</p>
+                            </div>
+                            <div class="col col-12">
+                                <p class="m-0 stat-text" id="stats-text-weapons">Weapons 0/100</p>
+                            </div>
+                            <div class="col col-12">
+                                <p class="m-0 stat-text" id="stats-text-armor">Armor 0/100</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mx-1 my-4 py-4 bg-primary">
+                        <div class="col col-1 p-0">
+                            <img class="d-block mx-auto card-icon" id="activity-icon" src="images/btn-heart.svg">
+                        </div>
+                        <div class="col col-3 p-0">
+                            <h2 class="card-title" id="activity-title">Stats</h2>
+                        </div>
+                        <div class="col col-6 col-md-3 offset-2 offset-md-5 my-auto">
+                            <div class="col col-12">
+                                <p class="m-0 stat-text" id="stats-text-hp">Health 0/100</p>
+                            </div>
+                            <div class="col col-12">
+                                <p class="m-0 stat-text" id="stats-text-ap">Stamina 0/100</p>
+                            </div>
+                            <div class="col col-12">
+                                <p class="m-0 stat-text" id="stats-text-weapons">Weapons 0/100</p>
+                            </div>
+                            <div class="col col-12">
+                                <p class="m-0 stat-text" id="stats-text-armor">Armor 0/100</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
+    <script src="scripts/ActivityManager.js"></script>
+    <script src="scripts/UIManager.js"></script>
+    <script src="scripts/StatManager.js"></script>
+    <script src="scripts/StartUp.js"></script>
 </html>
