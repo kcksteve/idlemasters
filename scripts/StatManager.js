@@ -1,14 +1,14 @@
 //Stat Manager - Manages the player stats. Saving, Loading, Clearing and accessing. Singleton class.
 class StatManager {
     //public stat objects
-    foraging = {level:0, xp:0, resource:0};
-    logging = {level:0, xp:0, resource:0};
-    fishing = {level:0, xp:0, resource:0};
-    mining = {level:0, xp:0, resource:0};
-    alchemy = {level:0, xp:0, resource:0};
-    armor = {level:0, xp:0};
-    weapon = {level:0, xp:0};
-    combat = {level:0, xp:0};
+    foraging = {level:1, xp:0, resource:0};
+    logging = {level:1, xp:0, resource:0};
+    fishing = {level:1, xp:0, resource:0};
+    mining = {level:1, xp:0, resource:0};
+    alchemy = {level:1, xp:0, resource:0};
+    armor = {level:1, xp:0};
+    weapon = {level:1, xp:0};
+    combat = {level:1, xp:0};
     player = {hp:100, ap:100};
 
     constructor() {
@@ -86,8 +86,8 @@ class StatManager {
         this.combat.level = parseInt(localStorage.getItem("combatLevel"));
         this.combat.xp = parseInt(localStorage.getItem("combatXP"));
 
-        this.player.hp = parseInt(localStorage.getItem("playerHp"));
-        this.player.ap = parseInt(localStorage.getItem("playerAp"));
+        this.player.hp = parseInt(localStorage.getItem("playerHP"));
+        this.player.ap = parseInt(localStorage.getItem("playerAP"));
     }
 
     //Clear all session and saved stats

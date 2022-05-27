@@ -21,7 +21,7 @@ class ActivityManager {
 
         //Ref to ui manager class
         this.#uiManager = uiManager;
-        uiManager.setup(this);
+        uiManager.setup(this, statManager);
     }
 
     canStartActivity(activity) {
@@ -115,7 +115,7 @@ class ActivityManager {
 
     stopActivity() {
         if (this.currentActivity != null) {
-            this.currentActivity = null;
+            //this.currentActivity = null;
             clearTimeout(this.#timeout);
             this.#timeout = null;
             this.#uiManager.activityBarReset();

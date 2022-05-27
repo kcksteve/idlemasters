@@ -9,6 +9,11 @@
     font-size: 28px;
 }
 
+.start-button {
+    font-size: 28px;
+    color: white;
+}
+
 .nav-icon {
     height: 30px;
     padding-right: 10px;
@@ -39,4 +44,17 @@
     text-align: right;
     font-weight: 500;
     color: white;
+}
+
+.activity-text {
+    text-align: right;
+    font-weight: 500;
+    font-size: 20px;
+    color: white;
+    list-style-type: none;
+}
+
+.activity-list-title {
+    color: white;
+    text-align: center;
 }
