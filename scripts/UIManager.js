@@ -24,6 +24,10 @@ class UIManager {
     #activityTitle = null;
     #activityIcon = null;
 
+    #activityProgressElapsed = null;
+    #activityProgressDuration = null;
+    #activityProgressTimeout = null;
+
     #inventoryFishingIcon = null;
     #inventoryFishingText = null;
     #inventoryAlchemyIcon = null;
@@ -74,6 +78,7 @@ class UIManager {
         this.#activityRewardList = document.getElementById("activity-reward-list");
         this.#activityCostList = document.getElementById("activity-cost-list");
         this.#activityStartButton = document.getElementById("activity-start");
+        this.#activityStartButton.addEventListener("click", () => this.activityToggle());
         this.#activityLevelText = document.getElementById("activity-level");
         this.#activityXPText = document.getElementById("activity-xp");
         this.#activityProgressBar = document.getElementById("activity-progress");
@@ -81,8 +86,10 @@ class UIManager {
         this.#activityIcon = document.getElementById("activity-icon");
 
         this.#inventoryFishingIcon = document.getElementById("inventory-icon-fishing");
+        this.#inventoryFishingIcon.addEventListener("click", () => this.#activityManager.playerEat());
         this.#inventoryFishingText = document.getElementById("inventory-text-fishing");
         this.#inventoryAlchemyIcon = document.getElementById("inventory-icon-alchemy");
+        this.#inventoryAlchemyIcon.addEventListener("click", () => this.#activityManager.playerHeal());
         this.#inventoryAlchemyText = document.getElementById("inventory-text-alchemy");
         this.#inventoryForagingText = document.getElementById("inventory-text-foraging");
         this.#inventoryLoggingText = document.getElementById("inventory-text-logging");
@@ -94,12 +101,49 @@ class UIManager {
         this.#statsArmorText = document.getElementById("stats-text-armor");
     }
 
-    activityBarStart() {
+    activityToggle() {
+        if (this.#activityManager.canStartActivity()) {
+            if (this.#activityManager.timeout === null) {
+                this.#activityManager.startActivity();
+                this.#activityStartButton.innerHTML = "Stop";
+            }
+            else {
+                this.#activityManager.stopActivity();
+                this.#activityStartButton.innerHTML = "Start";
+            }
+        }
+    }
 
+    activityBarStart(duration) {
+        this.activityBarReset();
+        this.#activityProgressDuration = duration;
+        this.activityBarUpdate();
+    }
+
+    activityBarUpdate() {
+        const progress = (this.#activityProgressElapsed / this.#activityProgressDuration) * 100;
+        this.#activityProgressBar.setAttribute("style", "width: " + progress + "%")
+        const tickDefault = 1000;
+        let tick = 0;
+        if (this.#activityProgressDuration - tickDefault > tickDefault) {
+            tick = tickDefault;
+            this.#activityProgressElapsed += tick;
+            this.#activityProgressTimeout = setTimeout(() => this.activityBarUpdate(), tick);
+        }
+        else if (this.#activityProgressDuration - tickDefault > 0) {
+            tick = tickDefault - this.#activityProgressDuration;
+            this.#activityProgressElapsed += tick;
+            this.#activityProgressTimeout = setTimeout(() => this.activityBarUpdate(), tick);
+        }
     }
 
     activityBarReset() {
-
+        if (this.#activityProgressTimeout != null) {
+            clearTimeout(this.#activityProgressTimeout);
+        }
+        this.#activityProgressBar.setAttribute("style", "width: " + 0 + "%")
+        this.#activityProgressElapsed = 0;
+        this.#activityProgressDuration = 0;
     }
 
     uiUpdate() {
@@ -199,26 +243,9 @@ class UIManager {
     }
 
     uiChangeTab(activity) {
-        switch (activity) {
-            case "foraging":
-                break;
-            case "logging":
-                break;
-            case "fishing":
-                break;
-            case "mining":
-                break;
-            case "alchemy":
-                break;
-            case "armor":
-                break;
-            case "weapons":
-                break;
-            case "combat":
-                break;
-        }
         this.#activityManager.stopActivity();
         this.#activityManager.currentActivity = activity;
+        this.#activityStartButton.innerHTML = "Start";
         this.uiUpdate();
     }
 
