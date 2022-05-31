@@ -157,7 +157,6 @@ class ActivityManager {
                         this.#statManager.fishing.xp += this.#xpIncrement;
                     }
                     this.#statManager.fishing.resource += Math.floor(this.#resourceMulti * this.#statManager.fishing.level) + 1;
-                    this.#statManager.player.ap -= this.#apDecrement;
                     break;
                 case "mining":
                     if (this.#statManager.mining.xp + this.#xpIncrement >= 100 && this.#statManager.mining.level < 100) {

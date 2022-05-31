@@ -213,14 +213,14 @@ class UIManager {
                 this.#activityLevelText.innerHTML = statFormat(this.#statManager.armor.level, "LVL");
                 this.#activityXPText.innerHTML = statFormat(this.#statManager.armor.xp, "XP");
                 addToList(this.#activityRewardList, ["+XP"]);
-                addToList(this.#activityCostList, ["-Stamina", "-Logging", "-Ore"]);
+                addToList(this.#activityCostList, ["-Stamina", "-Wood", "-Ore"]);
                 break;
             case "weapon":
                 this.#activityIcon.src = "images/btn-sword.svg"
                 this.#activityLevelText.innerHTML = statFormat(this.#statManager.weapon.level, "LVL");
                 this.#activityXPText.innerHTML = statFormat(this.#statManager.weapon.xp, "XP");
                 addToList(this.#activityRewardList, ["+XP"]);
-                addToList(this.#activityCostList, ["-Stamina", "-Logging", "-Ore"]);
+                addToList(this.#activityCostList, ["-Stamina", "-Wood", "-Ore"]);
                 break;
             case "combat":
                 this.#activityIcon.src = "images/btn-skull.svg"
