@@ -15,6 +15,7 @@ class UIManager {
     #navButtonWeapon = null;
     #navButtonCombat = null;
 
+    #activityCards = null;
     #activityRewardList = null;
     #activityCostList = null;
     #activityStartButton = null;
@@ -75,6 +76,7 @@ class UIManager {
         this.#navButtonCombat = document.getElementById("nav-button-combat");
         this.#navButtonCombat.addEventListener("click",() => this.uiChangeTab("combat"));
 
+        this.#activityCards = document.getElementById("activity-cards");
         this.#activityRewardList = document.getElementById("activity-reward-list");
         this.#activityCostList = document.getElementById("activity-cost-list");
         this.#activityStartButton = document.getElementById("activity-start");
@@ -117,6 +119,7 @@ class UIManager {
     activityBarStart(duration) {
         this.activityBarReset();
         this.#activityProgressDuration = duration;
+        this.#activityProgressElapsed = 1000;
         this.activityBarUpdate();
     }
 
@@ -230,6 +233,14 @@ class UIManager {
                 addToList(this.#activityCostList, ["-Stamina", "-Health"]);
                 break;
         }
+
+        if (this.#activityManager.canStartActivity()) {
+            this.#activityStartButton.innerHTML = "Start";
+        }
+        else {
+            this.#activityStartButton.innerHTML = "(Locked)";
+        }
+
         this.#inventoryFishingText.innerHTML = this.#statManager.fishing.resource;
         this.#inventoryForagingText.innerHTML = this.#statManager.foraging.resource;
         this.#inventoryLoggingText.innerHTML = this.#statManager.logging.resource;
@@ -243,10 +254,14 @@ class UIManager {
     }
 
     uiChangeTab(activity) {
-        this.#activityManager.stopActivity();
-        this.#activityManager.currentActivity = activity;
-        this.#activityStartButton.innerHTML = "Start";
-        this.uiUpdate();
+        if (activity != this.#activityManager.currentActivity) {
+            this.#activityCards.classList.add("opacity-0");
+            this.#activityManager.stopActivity();
+            this.#activityManager.currentActivity = activity;
+            this.#activityStartButton.innerHTML = "Start";
+            this.uiUpdate();
+            setTimeout(() => this.#activityCards.classList.remove("opacity-0"), 300);
+        }
     }
 
     navBarToggle() {
