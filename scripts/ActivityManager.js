@@ -217,8 +217,63 @@ class ActivityManager {
                         this.#statManager.combat.xp += this.#xpIncrement;
                     }
                     this.#statManager.combat.resource += Math.floor(this.#resourceMulti * this.#statManager.combat.level) + 1;
-                    this.#statManager.player.ap -= 5;
-                    this.#statManager.player.hp -= 10;
+
+                    let apToRemove = 0;
+                    if (this.#statManager.weapon.level === this.#statManager.combat.level) {
+                        apToRemove = 10;
+                    }
+                    else if (this.#statManager.weapon.level > this.#statManager.combat.level) {
+                        if (this.#statManager.weapon.level - this.#statManager.combat.level <= 4) {
+                            apToRemove = 10 - ((this.#statManager.weapon.level - this.#statManager.combat.level) * 2);
+                        }
+                        else {
+                            apToRemove = 1;
+                        }
+                    }
+                    else if (this.#statManager.weapon.level < this.#statManager.combat.level) {
+                        if (this.#statManager.combat.level - this.#statManager.weapon.level <= 4) {
+                            apToRemove = 10 + ((this.#statManager.combat.level - this.#statManager.weapon.level) * 2);
+                        }
+                        else {
+                            apToRemove = 20;
+                        }
+                    }
+
+                    if (this.#statManager.player.ap - apToRemove >= 0) {
+                        this.#statManager.player.ap -= apToRemove;
+                    }
+                    else {
+                        this.#statManager.player.ap = 0;
+                    }
+
+                    let hpToRemove = 0;
+                    if (this.#statManager.armor.level === this.#statManager.combat.level) {
+                        hpToRemove = 10;
+                    }
+                    else if (this.#statManager.armor.level > this.#statManager.combat.level) {
+                        if (this.#statManager.armor.level - this.#statManager.combat.level <= 4) {
+                            hpToRemove = 10 - ((this.#statManager.armor.level - this.#statManager.combat.level) * 2);
+                        }
+                        else {
+                            hpToRemove = 1;
+                        }
+                    }
+                    else if (this.#statManager.armor.level < this.#statManager.combat.level) {
+                        if (this.#statManager.combat.level - this.#statManager.armor.level <= 4) {
+                            hpToRemove = 10 + ((this.#statManager.combat.level - this.#statManager.armor.level) * 2);
+                        }
+                        else {
+                            hpToRemove = 20;
+                        }
+                    }
+
+                    if (this.#statManager.player.hp - hpToRemove >= 0) {
+                        this.#statManager.player.hp -= hpToRemove;
+                    }
+                    else {
+                        this.#statManager.player.hp = 0;
+                    }
+
                     break;
             }
             this.#uiManager.uiUpdate();
