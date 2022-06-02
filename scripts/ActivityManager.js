@@ -55,21 +55,21 @@ class ActivityManager {
                     return false;
                 }
             case "alchemy":
-                if (this.#statManager.player.ap >= this.#apDecrement && this.#statManager.player.hp > 0 && this.#statManager.foraging.resource > 1 && this.#statManager.logging.resource > 1) {
+                if (this.#statManager.player.ap >= this.#apDecrement && this.#statManager.player.hp > 0 && this.#statManager.foraging.resource > 0 && this.#statManager.logging.resource > 0) {
                     return true;
                 }
                 else {
                     return false;
                 }
             case "armor":
-                if (this.#statManager.player.ap >= this.#apDecrement && this.#statManager.player.hp > 0 && this.#statManager.logging.resource > 1 && this.#statManager.mining.resource > 1) {
+                if (this.#statManager.player.ap >= this.#apDecrement && this.#statManager.player.hp > 0 && this.#statManager.logging.resource > 0 && this.#statManager.mining.resource > 0) {
                     return true;
                 }
                 else {
                     return false;
                 }
             case "weapons":
-                if (this.#statManager.player.ap >= this.#apDecrement && this.#statManager.player.hp > 0 && this.#statManager.logging.resource > 1 && this.#statManager.mining.resource > 1) {
+                if (this.#statManager.player.ap >= this.#apDecrement && this.#statManager.player.hp > 0 && this.#statManager.logging.resource > 0 && this.#statManager.mining.resource > 0) {
                     return true;
                 }
                 else {
@@ -224,7 +224,13 @@ class ActivityManager {
             this.#uiManager.uiUpdate();
             //this.#statManager.saveAll();
             this.timeout = null;
-            this.startActivity();
+            if (this.canStartActivity()) {
+                this.startActivity();
+            }
+            else{
+                this.#uiManager.uiCheckStartLocked();
+                this.#uiManager.activityBarReset();
+            }
         }
     }
 

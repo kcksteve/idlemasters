@@ -72,7 +72,7 @@ class UIManager {
         this.#navButtonArmor = document.getElementById("nav-button-armor");
         this.#navButtonArmor.addEventListener("click",() => this.uiChangeTab("armor"));
         this.#navButtonWeapon = document.getElementById("nav-button-weapon");
-        this.#navButtonWeapon.addEventListener("click",() => this.uiChangeTab("weapon"));
+        this.#navButtonWeapon.addEventListener("click",() => this.uiChangeTab("weapons"));
         this.#navButtonCombat = document.getElementById("nav-button-combat");
         this.#navButtonCombat.addEventListener("click",() => this.uiChangeTab("combat"));
 
@@ -234,12 +234,7 @@ class UIManager {
                 break;
         }
 
-        if (this.#activityManager.canStartActivity()) {
-            this.#activityStartButton.innerHTML = "Start";
-        }
-        else {
-            this.#activityStartButton.innerHTML = "(Locked)";
-        }
+
 
         this.#inventoryFishingText.innerHTML = this.#statManager.fishing.resource;
         this.#inventoryForagingText.innerHTML = this.#statManager.foraging.resource;
@@ -260,7 +255,17 @@ class UIManager {
             this.#activityManager.currentActivity = activity;
             this.#activityStartButton.innerHTML = "Start";
             this.uiUpdate();
+            this.uiCheckStartLocked();
             setTimeout(() => this.#activityCards.classList.remove("opacity-0"), 300);
+        }
+    }
+
+    uiCheckStartLocked() {
+        if (this.#activityManager.canStartActivity()) {
+            this.#activityStartButton.innerHTML = "Start";
+        }
+        else {
+            this.#activityStartButton.innerHTML = "(Locked)";
         }
     }
 
