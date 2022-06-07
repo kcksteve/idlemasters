@@ -57,6 +57,10 @@ class StatManager {
 
     //Load all stats from webstorage
     loadAll() {
+        if (isNaN(localStorage.getItem("foragingLevel"))){
+            this.clearAll();
+        }
+
         this.foraging.level = parseInt(localStorage.getItem("foragingLevel"));
         this.foraging.xp = parseInt(localStorage.getItem("foragingXP"));
         this.foraging.resource = parseInt(localStorage.getItem("foragingResource"));
