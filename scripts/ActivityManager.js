@@ -68,7 +68,7 @@ class ActivityManager {
                 else {
                     return false;
                 }
-            case "weapons":
+            case "weapon":
                 if (this.#statManager.player.ap >= this.#apDecrement && this.#statManager.player.hp > 0 && this.#statManager.logging.resource > 0 && this.#statManager.mining.resource > 0) {
                     return true;
                 }
@@ -110,8 +110,8 @@ class ActivityManager {
                 case "armor":
                     activityTime = (12 - (this.#statManager.armor.level * this.#activityMulti)) * 1000;
                     break;
-                case "weapons":
-                    activityTime = (12 - (this.#statManager.weapons.level * this.#activityMulti)) * 1000;
+                case "weapon":
+                    activityTime = (12 - (this.#statManager.weapon.level * this.#activityMulti)) * 1000;
                     break;
                 case "combat":
                     activityTime = (12 - (this.#statManager.combat.level * this.#activityMulti)) * 1000;
@@ -195,15 +195,15 @@ class ActivityManager {
                     this.#statManager.mining.resource -= 1;
                     this.#statManager.logging.resource -= 1;
                     break;
-                case "weapons":
-                    if (this.#statManager.weapons.xp + this.#xpIncrement >= 100 && this.#statManager.weapons.level < 100) {
-                        this.#statManager.weapons.xp = this.#xpIncrement;
-                        this.#statManager.weapons.level += 1;
+                case "weapon":
+                    if (this.#statManager.weapon.xp + this.#xpIncrement >= 100 && this.#statManager.weapon.level < 100) {
+                        this.#statManager.weapon.xp = this.#xpIncrement;
+                        this.#statManager.weapon.level += 1;
                     }
-                    else if (this.#statManager.weapons.xp + this.#xpIncrement < 100 && this.#statManager.weapons.level < 100) {
-                        this.#statManager.weapons.xp += this.#xpIncrement;
+                    else if (this.#statManager.weapon.xp + this.#xpIncrement < 100 && this.#statManager.weapon.level < 100) {
+                        this.#statManager.weapon.xp += this.#xpIncrement;
                     }
-                    this.#statManager.weapons.resource += Math.floor(this.#resourceMulti * this.#statManager.weapons.level) + 1;
+                    this.#statManager.weapon.resource += Math.floor(this.#resourceMulti * this.#statManager.weapon.level) + 1;
                     this.#statManager.player.ap -= this.#apDecrement;
                     this.#statManager.mining.resource -= 1;
                     this.#statManager.logging.resource -= 1;
@@ -274,6 +274,26 @@ class ActivityManager {
                         this.#statManager.player.hp = 0;
                     }
 
+                    const reward = Math.ceil(Math.random() * 5);
+                    const rewardAmount = Math.ceil(Math.random() * (Math.ceil(this.#statManager.combat.level / 10) * 2));
+                    console.log(reward);
+                    switch (reward) {
+                        case 1:
+                            this.#statManager.fishing.resource += rewardAmount;
+                            break;
+                        case 2:
+                            this.#statManager.alchemy.resource += rewardAmount;
+                            break;
+                        case 3:
+                            this.#statManager.foraging.resource += rewardAmount;
+                            break;
+                        case 4:
+                            this.#statManager.logging.resource += rewardAmount;
+                            break;
+                        case 5:
+                            this.#statManager.mining.resource += rewardAmount;
+                            break;
+                    }
                     break;
             }
             this.#uiManager.uiUpdate();

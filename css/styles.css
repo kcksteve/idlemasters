@@ -23,7 +23,7 @@
     height: 50px;
 }
 
-.inventory-clickable {
+.clickable {
     cursor: pointer;
 }
 
@@ -32,6 +32,11 @@
     font-size: 24px;
     text-align: center;
     padding-top: 6px;
+}
+
+.welcome-text {
+    color: white;
+    font-size: 18px;
 }
 
 .card-icon {

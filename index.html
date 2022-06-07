@@ -14,7 +14,7 @@
             <div class= "row">
                 <div class="col col-12 col-md-3 col-xl-2 bg-primary p-0 ">
                     <div class="col col-3 col-md-12 d-inline-block">
-                        <img class="logo-image d-inline-block mx-auto img-fluid p-1 pm-4" src="images/logo.png">
+                        <img class="logo-image clickable d-inline-block mx-auto img-fluid p-1 pm-4" id="nav-logo" data-bs-toggle="modal" data-bs-target="#welcomeModal" src="images/logo.png">
                     </div>
                     <div class="col col-1 offset-7 d-inline-block d-md-none">
                         <button class="btn p-0" id="navHamburger"><img class="img-fluid" src="images/menu-icon.svg"></button>
@@ -58,11 +58,11 @@
                         </div>
                         <div class="row">
                             <div class="col col-4 col-md-2 offset-md-1">
-                                <img class="inventory-icon inventory-clickable d-block mx-auto" id="inventory-icon-fishing" src="images/btn-fish.svg">
+                                <img class="inventory-icon clickable d-block mx-auto" id="inventory-icon-fishing" src="images/btn-fish.svg">
                                 <p class="inventory-text" id="inventory-text-fishing">0</p>
                             </div>
                             <div class="col col-4 col-md-2">
-                                <img class="inventory-icon inventory-clickable d-block mx-auto" id="inventory-icon-alchemy" src="images/btn-potion.svg">
+                                <img class="inventory-icon clickable d-block mx-auto" id="inventory-icon-alchemy" src="images/btn-potion.svg">
                                 <p class="inventory-text" id="inventory-text-alchemy">0</p>
                             </div>
                             <div class="col col-4 col-md-2">
@@ -124,7 +124,41 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="welcomeModal" tabindex="-1" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content bg-primary">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title card-title" id="welcomeModalLabel">Welcome Adventurer!</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body welcome-text">
+                        <p>
+                            You have wandered into the land of Ahh, it's quite the magical place but also very dangerous. Keep your wits about you!
+                        </p>
+                        <ul>
+                            <li>Start you adventure by fishing one of the wonderful lakes. The <b>fish</b> are delicious but also help you regain <b>stamina</b> quickly. Use them by clicking on the <b>fish</b> in your inventory.</li>
+                            <li>You will want to have some health <b>potions</b> on hand incase you get injured. Forage the woods to find <b>herbs</b> and <b>logs</b> used the craft these useful items, you can never have too many. Use them by clicking on the <b>potion</b> in your inventory.
+                            </li>
+                            <li>Your going to need some good gear to defend yourself. You can visit the forge to increase you <b>armor</b> or <b>weapon</b> level but you will need some <b>ore</b> and <b>wood</b> to keep the fire stoked.</li>
+                            <li>If your after glory there are plenty of battles to be had and the rewards can be great. Be sure your <b>armor</b> and <b>weapon</b> level are up to the <b>combat</b> level or you will fall quickly!
+                            </li>
+                        </ul>
+                        <p>
+                            One more thing adventurer...
+                        </p>
+                        <p>
+                            It's dangrous to go alone! Take this. <img class="nav-icon" src="images/btn-sword.svg">
+                        </p>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button type="button" class="btn btn-danger inventory-text" id="welcomeNew" data-bs-dismiss="modal">Start New Adventure</button>
+                        <button type="button" class="btn btn-info inventory-text" id="welcomeContinue" data-bs-dismiss="modal">Continue Adventure</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
+    <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/ActivityManager.js"></script>
     <script src="scripts/UIManager.js"></script>
     <script src="scripts/StatManager.js"></script>

@@ -91,7 +91,37 @@ class StatManager {
     }
 
     //Clear all session and saved stats
-    ClearAll() {
-        Window.localStorage.clear();
+    clearAll() {
+        localStorage.setItem("foragingLevel", 1);
+        localStorage.setItem("foragingXP", 0);
+        localStorage.setItem("foragingResource", 0);
+
+        localStorage.setItem("loggingLevel", 1);
+        localStorage.setItem("loggingXP", 0);
+        localStorage.setItem("loggingResource", 0);
+
+        localStorage.setItem("fishingLevel", 1);
+        localStorage.setItem("fishingXP", 0);
+        localStorage.setItem("fishingResource", 0);
+
+        localStorage.setItem("miningLevel", 1);
+        localStorage.setItem("miningXP", 0);
+        localStorage.setItem("miningResource", 0);
+
+        localStorage.setItem("alchemyLevel", 1);
+        localStorage.setItem("alchemyXP", 0);
+        localStorage.setItem("alchemyResource", 0);
+
+        localStorage.setItem("armorLevel", 1);
+        localStorage.setItem("armorXP", 0);
+
+        localStorage.setItem("weaponLevel", 1);
+        localStorage.setItem("weaponXP", 0);
+
+        localStorage.setItem("combatLevel", 1);
+        localStorage.setItem("combatXP", 0);
+
+        localStorage.setItem("playerHP", 100);
+        localStorage.setItem("playerAP", 100);
     }
 }

@@ -4,6 +4,10 @@ class UIManager {
     #activityManager = null;
     #statManager = null;
 
+    #welcomeModal = null;
+    #welcomeNew = null;
+    #welcomeContinue = null;
+
     #navButtons = null;
     #navHamburger = null;
     #navButtonFishing = null;
@@ -56,6 +60,11 @@ class UIManager {
         this.#statManager = statManager;
 
         //element references and listeners
+        this.#welcomeModal = document.getElementById("welcomeModal");
+        this.#welcomeNew = document.getElementById("welcomeNew");
+        this.#welcomeNew.addEventListener("click", () => this.welcomeNewClick());
+        this.#welcomeContinue = document.getElementById("welcomeContinue");
+
         this.#navButtons = document.getElementById("navButtons");
         this.#navHamburger = document.getElementById("navHamburger");
         this.#navHamburger.addEventListener("click", this.navBarToggle);
@@ -72,7 +81,7 @@ class UIManager {
         this.#navButtonArmor = document.getElementById("nav-button-armor");
         this.#navButtonArmor.addEventListener("click",() => this.uiChangeTab("armor"));
         this.#navButtonWeapon = document.getElementById("nav-button-weapon");
-        this.#navButtonWeapon.addEventListener("click",() => this.uiChangeTab("weapons"));
+        this.#navButtonWeapon.addEventListener("click",() => this.uiChangeTab("weapon"));
         this.#navButtonCombat = document.getElementById("nav-button-combat");
         this.#navButtonCombat.addEventListener("click",() => this.uiChangeTab("combat"));
 
@@ -101,6 +110,17 @@ class UIManager {
         this.#statsStaminaText = document.getElementById("stats-text-ap");
         this.#statsWeaponsText = document.getElementById("stats-text-weapons");
         this.#statsArmorText = document.getElementById("stats-text-armor");
+    }
+
+    welcomeShow() {
+        var myModal = new bootstrap.Modal(this.#welcomeModal);
+        myModal.show()
+    }
+
+    welcomeNewClick() {
+        this.#statManager.clearAll();
+        this.#statManager.loadAll();
+        this.uiUpdate();
     }
 
     activityToggle() {
@@ -229,7 +249,7 @@ class UIManager {
                 this.#activityIcon.src = "images/btn-skull.svg"
                 this.#activityLevelText.innerHTML = statFormat(this.#statManager.combat.level, "LVL");
                 this.#activityXPText.innerHTML = statFormat(this.#statManager.combat.xp, "XP");
-                addToList(this.#activityRewardList, ["+XP"]);
+                addToList(this.#activityRewardList, ["+XP", "+Random Loot"]);
                 addToList(this.#activityCostList, ["-Stamina", "-Health"]);
                 break;
         }
@@ -246,6 +266,8 @@ class UIManager {
         this.#statsWeaponsText.innerHTML = statFormat(this.#statManager.weapon.level, "Weapons");
         this.#statsArmorText.innerHTML = statFormat(this.#statManager.armor.level, "Armor");
         this.#activityTitle.innerHTML = capitalize(this.#activityManager.currentActivity);
+
+        this.#statManager.saveAll();
     }
 
     uiChangeTab(activity) {
