@@ -10,6 +10,7 @@ class UIManager {
 
     #navButtons = null;
     #navHamburger = null;
+    #navHamburgerWrapper = null;
     #navButtonFishing = null;
     #navButtonForaging = null;
     #navButtonLogging = null;
@@ -68,6 +69,7 @@ class UIManager {
         this.#navButtons = document.getElementById("navButtons");
         this.#navHamburger = document.getElementById("navHamburger");
         this.#navHamburger.addEventListener("click", this.navBarToggle);
+        this.#navHamburgerWrapper = document.getElementById("navHamburgerWrapper");
         this.#navButtonFishing = document.getElementById("nav-button-fishing");
         this.#navButtonFishing.addEventListener("click",() => this.uiChangeTab("fishing"));
         this.#navButtonForaging = document.getElementById("nav-button-foraging");
@@ -254,8 +256,6 @@ class UIManager {
                 break;
         }
 
-
-
         this.#inventoryFishingText.innerHTML = this.#statManager.fishing.resource;
         this.#inventoryForagingText.innerHTML = this.#statManager.foraging.resource;
         this.#inventoryLoggingText.innerHTML = this.#statManager.logging.resource;
@@ -271,6 +271,9 @@ class UIManager {
     }
 
     uiChangeTab(activity) {
+        if (this.#navHamburgerWrapper.classList.contains("d-inline-block")) {
+            this.navBarToggle();
+        }
         if (activity != this.#activityManager.currentActivity) {
             this.#activityCards.classList.add("opacity-0");
             this.#activityManager.stopActivity();
